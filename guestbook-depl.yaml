@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notebook
+  labels:
+    app: notebook
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notebook
+  template:
+    metadata:
+      labels:
+        app: notebook
+    spec:
+      containers:
+      - name: notebook
+        image: 381492301125.dkr.ecr.ap-southeast-1.amazonaws.com/notebook:1.0.3
+        volumeMounts:
+          - name: aws-credentials-vl
+            mountPath: /root/.aws/credentials
+            subPath: credentials
+            readOnly: true
+        ports:
+          - name: http-server
+            containerPort: 3000
+        resources:
+          limits:
+            cpu: 300m
+          requests:
+            cpu: 100m
+      volumes:
+        - name: aws-credentials-vl
+          secret:
+            secretName: aws-secret
+      imagePullSecrets:
+        - name: ecr-secret

@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: notebook
+  labels:
+    app: notebook
+spec:
+  ports:
+  - port: 3000
+    targetPort: http-server
+  selector:
+    app: notebook
+  type: LoadBalancer
