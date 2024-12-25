@@ -33,7 +33,7 @@ cd nt131-notebook
 ```
 - Build the provided Dockerfile:
 ```bash
-docker build -t notebook .
+docker build --platform linux/arm/v7 -t notebook .
 ```
 - Push that image to ECR:
 ```bash
