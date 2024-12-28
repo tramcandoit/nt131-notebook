@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notebook-ingress
+  annotations:
+    kubernetes.io/ingress.class: "alb" # Use the AWS Load Balancer Controller
+    alb.ingress.kubernetes.io/scheme: "internet-facing" # Make it publicly accessible
+    alb.ingress.kubernetes.io/load-balancer-type: "nlb" # Use Network Load Balancer
+    alb.ingress.kubernetes.io/target-type: "ip" # Use IP as target type
+    alb.ingress.kubernetes.io/backend-protocol: "HTTP" # Backend communication protocol
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]' # Configure listener ports
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: notebook
+            port:
+              number: 3000

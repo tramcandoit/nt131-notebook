@@ -10,4 +10,4 @@ spec:
     targetPort: http-server
   selector:
     app: notebook
-  type: LoadBalancer
+  type: ClusterIP

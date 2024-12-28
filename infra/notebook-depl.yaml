@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: notebook
-        image: 381492301125.dkr.ecr.ap-southeast-1.amazonaws.com/notebook:1.0.3
+        image: 381492301125.dkr.ecr.ap-southeast-1.amazonaws.com/notebook:2.0.0
         volumeMounts:
           - name: aws-credentials-vl
             mountPath: /root/.aws/credentials
